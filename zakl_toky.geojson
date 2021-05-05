@@ -1,0 +1,29 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "NAZEV": "Labe",
+                "TOK_ID": 100010000100,
+                "RAD_TOKU": 1
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "NAZEV": "Odra",
+                "TOK_ID": 200010000100,
+                "RAD_TOKU": 1
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "NAZEV": "Morava",
+                "TOK_ID": 401110000100,
+                "RAD_TOKU": 2
+            }
+        }
+    ]
+}
