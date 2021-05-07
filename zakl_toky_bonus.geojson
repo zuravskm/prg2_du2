@@ -1,0 +1,109 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "properties": {
+                "NAZEV": "Labe",
+                "TOK_ID": 100010000100,
+                "RAD_TOKU": 1
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "NAZEV": "Odra",
+                "TOK_ID": 200010000100,
+                "RAD_TOKU": 1
+            }
+        },
+        {
+            "type": "Feature",
+            "properties": {
+                "NAZEV": "Morava",
+                "TOK_ID": 401110000100,
+                "RAD_TOKU": 2
+            }
+        }
+        {
+            "type": "Feature",
+            "properties": {
+                "NAZEV": "Lužická Nisa",
+                "TOK_ID": 207220000100,
+                "RAD_TOKU": 2
+            }
+        }
+        {
+            "type": "Feature",
+            "properties": {
+                "NAZEV": "Mandava",
+                "TOK_ID": 207600000100,
+                "RAD_TOKU": 3
+            }
+        }
+        {
+            "type": "Feature",
+            "properties": {
+                "NAZEV": "Smědá",
+                "TOK_ID": 207790000100,
+                "RAD_TOKU": 3
+            }
+        }
+        {
+            "type": "Feature",
+            "properties": {
+                "NAZEV": "Stěnava",
+                "TOK_ID": 205870000100,
+                "RAD_TOKU": 3
+            }
+        }
+        {
+            "type": "Feature",
+            "properties": {
+                "NAZEV": "Renštok",
+                "TOK_ID": 420200400100,
+                "RAD_TOKU": 5
+            }
+        }
+        {
+            "type": "Feature",
+            "properties": {
+                "NAZEV": "Horský potok",
+                "TOK_ID": 401060000100,
+                "RAD_TOKU": 3
+            }
+        }
+        {
+            "type": "Feature",
+            "properties": {
+                "NAZEV": "Čertova voda",
+                "TOK_ID": 400930200100,
+                "RAD_TOKU": 5
+            }
+        }
+        {
+            "type": "Feature",
+            "properties": {
+                "NAZEV": "Řezná",
+                "TOK_ID": 400560000100,
+                "RAD_TOKU": 5
+            }
+        }
+        {
+            "type": "Feature",
+            "properties": {
+                "NAZEV": "Kouba",
+                "TOK_ID": 400680000100,
+                "RAD_TOKU": 3
+            }
+        }
+        {
+            "type": "Feature",
+            "properties": {
+                "NAZEV": "Kateřinský potok",
+                "TOK_ID": 400050000100,
+                "RAD_TOKU": 4
+            }
+        }
+    ]
+}
