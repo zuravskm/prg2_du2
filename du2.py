@@ -64,6 +64,7 @@ def BFS_basin(graph_river, dic_stream):
             else:
                 streams_graph[edge]['basin'] = streams_graph.nodes[edge]['basin'] + 1"""
     return river_dictionary
+
 def load_streams(data_path):
     streams = geopandas.read_file(data_path)
     streams_dict = {}
