@@ -66,7 +66,7 @@ def save_data(input_data, output_path, dict_basin, all_IDs):
     df = pd.DataFrame(dataframe)
     # joining RAD_TOKU to input data
     output_data = input_data.merge(df, on = 'TOK_ID')
-    output_data.to_file(output_path, driver = 'ESRI Shapefile', encoding = 'utf-8') # , driver='GeoJSON')
+    output_data.to_file(output_path, driver = 'ESRI Shapefile', encoding = 'windows-1250') # , driver='GeoJSON')
 
 def count_length(data_path):
     """counts the sum of length of each rank that exists in output data and the sum of length of reachless streams"""
@@ -130,9 +130,9 @@ def print_reachless_stream_names(output_path):
 
 
 # input data
-data = geopandas.read_file('data/A03_Vodni_tok_HU.shp', driver = 'ESRI Shapefile', encoding = 'utf-8')
+data = geopandas.read_file('data/A02_Vodni_tok_JU.shp', driver = 'ESRI Shapefile', encoding = 'windows-1250')
 # input definition file
-stream_list = load_streams("zakl_toky_bonus.geojson")
+stream_list = load_streams("zakl_toky.geojson")
 # output file
 out_path = "data/output.shp"
 
