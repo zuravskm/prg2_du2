@@ -132,7 +132,7 @@ def print_reachless_stream_names(output_path):
 # input data
 data = geopandas.read_file('data/A03_Vodni_tok_HU.shp', driver = 'ESRI Shapefile', encoding = 'utf-8')
 # input definition file
-stream_list = load_streams("zakl_toky.geojson")
+stream_list = load_streams("zakl_toky_bonus.geojson")
 # output file
 out_path = "data/output.shp"
 
