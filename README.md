@@ -13,12 +13,23 @@ Jména toků, které jsou nedosažitelné z uvažovaných povodí (nebyl jim ur�
 Jako testová data byla použita datová sada A02 z databáze DIBAVOD ve formátu SHP. Druhým vstupem je soubor ve formátu GeoJSON, ve kterém jsou definovány IDs a řády toků vybraných 13 řek vytékajících z ČR.
 
 ### Přístup k datům
-Vstupní data jsou převedena do struktury grafu s využitím knihovny NetworkX. Graf je vytvořen z hran, které reprezentují jednotlivé toky. Koncové nody hran jsou zeměpisné souřadnice vstupních dat. 
+Vstupní data jsou převedena do struktury grafu s využitím knihovny NetworkX ve funkci create_graph. Graf je vytvořen z hran, které reprezentují jednotlivé toky. Koncové nody hran jsou zeměpisné souřadnice vstupních dat. Výstupem této funkce je vlastní graf a slovník, jehož klíčem jsou ID vodních toků a hodnotou je řád toku nastavený na hodnotu -1.
 
 Řády toků jsou načteny ze vstupního GeoJSONu pomocí funkce load_streams. Výstupem funkce je slovník 13 vstupních vodních toků, kde klíčem jsou ID vodních toků a hodnotou je jejich řád.
 
 ### Přiřazování řádu toků
 Vytvořený graf je procházen pomocí algoritmu BFS (tzn. procházení grafu do šířky). ...
 
-### 
+### Přiřazení atributu RAD_TOKU a výstup dat
+Přiřazení atributu RAD_TOKU a výstup dat a výstup dat provádí funkce save_data, jejíž parametry jsou vstupní data, cesta k výstupnímu souboru, slovník vodních toků (dict_basin), které mají přiřazený řád, a slovník všech vodních toků s nastaveným řádem -1. 
+
+Slovník dict_basin je rozšířen o nedosažitelné toky, které mají řád -1 a nejsou součástí původního slovníku dict_basin. Výsledný slovník je zapsán do výstupního souboru ve formátu GeoJSON. 
+
+### Výpočet délky toku dle řádu
+
+
+
+
+
+
 
