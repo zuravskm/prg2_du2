@@ -23,6 +23,7 @@ def create_graph(streams_data, streams_dic):
 def BFS_basin(graph_river, dic_stream): 
     river_dictionary = {}
     for i in dic_stream:
+        print(len(dic_stream),i)
         first_point = dic_stream[i][1]
         graph_river.nodes[first_point]["stream_id"] = i
         graph_river.nodes[first_point]["basin"] = dic_stream[i][0]
@@ -55,7 +56,8 @@ def load_streams(data_path):
 data = geopandas.read_file('data/dibavod_test.shp')
 input_file = geopandas.read_file("zakl_toky.geojson")
 stream_list = {123.0:[1], 333.0:[1]} # 123 je Labe ktery ma rad toku 1, 333 je odra s radek toku 1
-# IMPORTANT: not suitable for large datasets!
+# IMPORTANT: drawing is not suitable for large datasets (whole DIBAVOD data)!
+draw_plot = True
 label_edge = True
 label_edge_atribute = 'basin' # display basin level on edges
 label_node = True
@@ -76,22 +78,23 @@ print(dictionary_streams) # dictionary with streams ID and basin level
 
 # print graph info
 print(nx.info(streams_graph))
-# draw graph
-pos = {n:n for n in streams_graph.nodes}
-labels_node = {}
-if label_node== True:
-    for v in streams_graph.nodes:
-        if label_node_atribute in streams_graph.nodes[v]:
-            labels_node[v] = streams_graph.nodes[v][label_node_atribute]
-        else:
-            labels_node[v] = 'inf'
+if draw_plot == True:
+    # draw graph
+    pos = {n:n for n in streams_graph.nodes}
+    labels_node = {}
+    if label_node== True:
+        for v in streams_graph.nodes:
+            if label_node_atribute in streams_graph.nodes[v]:
+                labels_node[v] = streams_graph.nodes[v][label_node_atribute]
+            else:
+                labels_node[v] = 'inf'
 
-nx.draw(streams_graph, with_labels=label_node, pos=pos,labels=labels_node, node_size = 5, font_color='green',font_size=25)
-if label_edge == True:
-    edge_labels = nx.get_edge_attributes(streams_graph,label_edge_atribute) # edge_labels dictionary
-    nx.draw_networkx_edge_labels(streams_graph,pos,edge_labels=edge_labels,font_color='red')
+    nx.draw(streams_graph, with_labels=label_node, pos=pos,labels=labels_node, node_size = 5, font_color='green',font_size=25)
+    if label_edge == True:
+        edge_labels = nx.get_edge_attributes(streams_graph,label_edge_atribute) # edge_labels dictionary
+        nx.draw_networkx_edge_labels(streams_graph,pos,edge_labels=edge_labels,font_color='red')
 
-plt.show()
+    plt.show()
 # BONUS
 # Mimo povodí Labe, Odry a Moravy uvažujte ještě alespoň 10 dalších toků, které z ČR odtékají, aniž by byly na území ČR součástí nějakého z výše uvedených povodí. Tyto toky přidejte do vstupního souboru spolu s jejich řádem
 # Vypište jména všech pojmenovaných toků, jimž nebyl určen řád, protože jsou z daných vstupních povodí nedosažitelné na území ČR
