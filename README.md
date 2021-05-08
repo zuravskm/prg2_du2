@@ -10,9 +10,15 @@ Jména toků, které jsou nedosažitelné z uvažovaných povodí (nebyl jim ur�
 
 ## Vývojářská dokumentace
 ### Vstupy
-Jako testová data byla použita datová sada A02 z databáze DIBAVOD...
+Jako testová data byla použita datová sada A02 z databáze DIBAVOD ve formátu SHP. Druhým vstupem je soubor ve formátu GeoJSON, ve kterém jsou definovány IDs a řády toků vybraných 13 řek vytékajících z ČR.
 
+### Přístup k datům
+Vstupní data jsou převedena do struktury grafu s využitím knihovny NetworkX. Graf je vytvořen z hran, které reprezentují jednotlivé toky. Koncové nody hran jsou zeměpisné souřadnice vstupních dat. 
+
+Řády toků jsou načteny ze vstupního GeoJSONu pomocí funkce load_streams. Výstupem funkce je slovník 13 vstupních vodních toků, kde klíčem jsou ID vodních toků a hodnotou je jejich řád.
 
 ### Přiřazování řádu toků
+Vytvořený graf je procházen pomocí algoritmu BFS (tzn. procházení grafu do šířky). ...
 
+### 
 
