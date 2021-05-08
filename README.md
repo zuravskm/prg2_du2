@@ -29,9 +29,10 @@ Slovník dict_basin je rozšířen o nedosažitelné toky, které mají řád -1
 Nejprve je vytvořen seznam všech řádů, které se ve vstupních datech vyskytují. Pomocí tohoto seznamu jsou procházena výstupní data a pro každý řád je sčítána délka toků. Délka nedosažitelných toků (toky s řádem -1) je počítána v samostatném cyklu na rozdíl od délky toků s přiřazeným řádem. Výsledné součty délek toků podle řádů a součet délky nedosažitelných toků jsou vypsány do terminálu. 
 
 ### Výpis názvů nedosažitelných toků
+Výstupní data jsou procházena a pokud je jejich řád -1 a zároveň mají nějaký název, je tento název uložen do seznamu, který je následně vypsán do terminálu. 
 
-
-
+### Vykreslení grafu
+Graf je možné také vykreslit, ale není to vhodné vzhledem k vekému objemu dat. 
 
 
 
