@@ -1,4 +1,4 @@
-# Řády vodních toků
+# Řády vodních toků   nadaskhdlfakjs
 ## Uživatelská dokumentace
 Aplikace umožňuje uživateli spočítat řády jednotlivých toků a součet délek toků pro každý řád. Vstupem jsou data zdrojová vodních toků ve formátu SHP, které je možné stáhnout např. z dat DIBAVOD, a soubor GeoJSON, ve kterém jsou uvedeny řády toků, od kterých jsou další odvozovány další toky. Výstupem je soubor ve formátu GeoJSON, který obsahuje všechny prvky se všemi atributy jako ve vstupním souboru a nově přidaný atribut RAD_TOKU obsahující informaci o řádu daného toku.
 
