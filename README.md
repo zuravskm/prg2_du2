@@ -26,7 +26,9 @@ Přiřazení atributu RAD_TOKU a výstup dat a výstup dat provádí funkce save
 Slovník dict_basin je rozšířen o nedosažitelné toky, které mají řád -1 a nejsou součástí původního slovníku dict_basin. Výsledný slovník je zapsán do výstupního souboru ve formátu GeoJSON. 
 
 ### Výpočet délky toku dle řádu
+Nejprve je vytvořen seznam všech řádů, které se ve vstupních datech vyskytují. Pomocí tohoto seznamu jsou procházena výstupní data a pro každý řád je sčítána délka toků. Délka nedosažitelných toků (toky s řádem -1) je počítána v samostatném cyklu na rozdíl od délky toků s přiřazeným řádem. Výsledné součty délek toků podle řádů a součet délky nedosažitelných toků jsou vypsány do terminálu. 
 
+### Výpis názvů nedosažitelných toků
 
 
 
