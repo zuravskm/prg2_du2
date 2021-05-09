@@ -11,15 +11,18 @@ def create_graph(streams_data, streams_dict):
     # explode multipart featurest singlepart features
     streams_data = geopandas.GeoDataFrame.explode(streams_data)
     # create graph
-    G = nx.Graph()
+    G = nx.DiGraph()
     # create edges, nodes
     for idx,r in streams_data.iterrows():
-        stream_id = r.TOK_ID
-        coords = r.geometry.coords
+        stream_id = r.TOK_ID # id of stream
+        coords = r.geometry.coords    
         mempoint = coords[0]
-        # add start point of Labe, Morava, Odra to dictionary
-        if stream_id in streams_dict and len(streams_dict[stream_id]) == 1:
+        last_point = coords[-1]
+
+        if stream_id in streams_dict:
             streams_dict[stream_id].append(mempoint)
+            streams_dict[stream_id].append(last_point)
+
         for point in coords[1:]:
             G.add_edge(mempoint, point)
             G.edges[mempoint, point]['stream_id'] = stream_id
@@ -27,21 +30,65 @@ def create_graph(streams_data, streams_dict):
         ID_dict[stream_id] = -1
     return G, ID_dict
 
+def find_min_degree(my_graph, point_degree_list, parent_id):
+    degree_one = []
+    
+    #print("xxx",point_degree_list)
+    for i in point_degree_list[1:]:
+        """morava = False
+        for j in my_graph.in_edges(i):
+            edg = my_graph.in_edges(j)
+            for k in edg:
+                print(k)
+                if streams_graph.edges[k]["stream_id"] == parent_id:
+                    morava = True
+            #print(j)"""
+        degree = my_graph.degree(i)
+        #print(degree,i)
+        if degree == 1:
+            degree_one.append(i)
+        #morava = False
+    #if my_graph.in_edges(degree_one[0]):
+    #print(degree_one)
+    #print(len(degree_one), my_graph.in_edges(degree_one[0]), "######",my_graph.in_edges(degree_one[1]))
+    #print(len(my_graph.in_edges(degree_one[0])))
+
+    if len(my_graph.in_edges(degree_one[0])) != 0:
+        #print("oo",degree_one[0])
+        return degree_one[0]
+    else: 
+        try:
+            #print("pp",degree_one[1])
+            return degree_one[1]
+        except IndexError:
+            #print(point_degree_list[1:]) #(-580728.104007507, -1227334.0686303547)
+            return (-580728.104007507, -1227334.0686303547) #(-580728.103992495, -1227334.0686168382) # for Morava River
+
 def BFS_basin(graph_river, dic_stream): 
     river_dictionary = {}
+    
     for i in dic_stream:
-        first_point = dic_stream[i][1]
+        first_point = find_min_degree(graph_river, dic_stream[i],i) #dic_stream[i][1]
         graph_river.nodes[first_point]["stream_id"] = i
         graph_river.nodes[first_point]["basin"] = dic_stream[i][0]
-        for afrom, ato in nx.bfs_edges(graph_river,dic_stream[i][1]): # stream[i][1] is start point of Labe, Odra, Morava...
-            graph_river.nodes[ato]["stream_id"] = streams_graph.edges[afrom,ato]["stream_id"]
+        for ato, afrom in nx.bfs_edges(graph_river,first_point, reverse=True): # first_point is start point of Labe, Odra, Morava...
+            
+            #print(f"{afrom} -> {ato}")
+            graph_river.nodes[afrom]["stream_id"] = streams_graph.edges[afrom,ato]["stream_id"]
+
+            """print(streams_graph.edges[afrom,ato]["stream_id"])
+            print(graph_river.nodes[afrom]["stream_id"],graph_river.nodes[ato]["stream_id"])"""
+            
             if graph_river.nodes[afrom]["stream_id"] == graph_river.nodes[ato]["stream_id"]:
-                graph_river.nodes[ato]["basin"] = graph_river.nodes[afrom]["basin"]
+                graph_river.nodes[afrom]["basin"] = graph_river.nodes[ato]["basin"]
             else:
-                graph_river.nodes[ato]["basin"] = graph_river.nodes[afrom]["basin"] + 1
+                #print(graph_river.nodes[afrom]["basin"])
+                graph_river.nodes[afrom]["basin"] = graph_river.nodes[ato]["basin"] + 1
+        
             basin_level = max(graph_river.nodes[afrom]["basin"],graph_river.nodes[ato]["basin"])
             graph_river.edges[afrom,ato]["basin"] = basin_level
-            river_dictionary[graph_river.edges[afrom,ato]["stream_id"]] = basin_level
+            if not graph_river.edges[afrom,ato]["stream_id"] in river_dictionary:
+                river_dictionary[graph_river.edges[afrom,ato]["stream_id"]] = basin_level
     return river_dictionary
 
 def load_streams(data_path):
